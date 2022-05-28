@@ -12,7 +12,7 @@ void draw() {
 }
 
 void mousePressed() {
-  board.mousePressed((width / 2) - (board.drawSize / 2), 0);
+  board.mousePressed((width / 2) - (board.drawSize / 2), 0, 'X');
 }
 /*for (int x = 0; x < 3; x++) {
     for (int y = 0; y < 3; y++) {
