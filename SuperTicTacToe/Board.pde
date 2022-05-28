@@ -19,7 +19,7 @@ class Board {
     int gridClickX = floor((mouseX - posX) / pieceSize);
     int gridClickY = floor((mouseY - posY) / pieceSize);
     if (gridClickX >= 0 && gridClickX < boardSize && gridClickY >= 0 && gridClickY < boardSize) {
-      println(gridClickX, gridClickY);
+      println("Board:", gridClickX, gridClickY);
     }
   }
   
@@ -66,5 +66,20 @@ class GlobalBoard extends Board {
     }
     
     drawGrid(posX, posY, drawSize, pieceSize, boardSize, color(0));
+  }
+  
+  void mousePressed(float posX, float posY, char side) { //TODO cleanup
+    updateGlobalBoard(); // Put this in a different place
+    posX += (width / 2) - (drawSize / 2);
+    posY += (height / 2) - (drawSize / 2);
+    int gridClickX = floor((mouseX - posX) / pieceSize);
+    int gridClickY = floor((mouseY - posY) / pieceSize);
+    if (gridClickX >= 0 && gridClickX < boardSize && gridClickY >= 0 && gridClickY < boardSize) {
+      Board clickedBoard = boardArr[gridClickX][gridClickY];
+      if (clickedBoard.getWinner() == 0) {
+        println("Global Board:", gridClickX, gridClickY);
+        clickedBoard.mousePressed(posX + (gridClickX * clickedBoard.drawSize), posY + (gridClickY * clickedBoard.drawSize), side);
+      }
+    }
   }
 }

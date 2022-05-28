@@ -12,6 +12,7 @@ void draw() {
 }
 
 void mousePressed() {
+  globalBoard.mousePressed(0, 0, 'X');
   //board.mousePressed((width / 2) - (board.drawSize / 2), 0, 'X');
 }
 
