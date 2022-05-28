@@ -24,11 +24,8 @@ class GlobalBoard extends Board {
       }
     }
   }
-
-  void draw(float posX, float posY) { // The global board is meant to be centered, so posX and posY should be 0
-    posX += (width / 2) - (drawSize / 2);
-    posY += (height / 2) - (drawSize / 2);
-
+  
+  void drawPieces(float posX, float posY) { // A local board is a piece on a global board
     for (int x = 0; x < boardSize; x++) {
       for (int y = 0; y < boardSize; y++) {
         Board current = boardArr[x][y];
@@ -36,6 +33,13 @@ class GlobalBoard extends Board {
         current.draw(posX + centerOffset + (x * pieceSize), posY + centerOffset + (y * pieceSize));
       }
     }
+  }
+
+  void draw(float posX, float posY) { // The global board is meant to be centered, so posX and posY should be 0
+    posX += (width / 2) - (drawSize / 2);
+    posY += (height / 2) - (drawSize / 2);
+    
+    drawPieces(posX, posY);
     drawGrid(posX, posY, drawSize, pieceSize, boardSize, color(0));
   }
 

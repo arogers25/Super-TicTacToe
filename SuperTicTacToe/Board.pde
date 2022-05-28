@@ -11,8 +11,29 @@ class Board {
     pieceArr = new char[boardSize][boardSize];
   }
 
+  void drawPieces(float posX, float posY) { 
+    for (int x = 0; x < boardSize; x++) {
+      for (int y = 0; y < boardSize; y++) {
+        if (pieceArr[x][y] != 0) {
+          float pieceOffset = pieceSize / 4;
+          switch (pieceArr[x][y]) {
+          case 'X':
+            drawX(posX + (x * pieceSize) + pieceOffset, posY + (y * pieceSize) + pieceOffset, pieceSize / 2);
+            break;
+          case 'O':
+            drawO(posX + (x * pieceSize) + pieceOffset, posY + (y * pieceSize) + pieceOffset, pieceSize / 2);
+            break;
+          default:
+            break;
+          }
+        }
+      }
+    }
+  }
+
   void draw(float posX, float posY) {
     drawGrid(posX, posY, drawSize, pieceSize, boardSize, color(170));
+    drawPieces(posX, posY);
   }
 
   void mousePressed(float posX, float posY, char side) {
