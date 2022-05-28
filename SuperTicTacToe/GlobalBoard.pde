@@ -1,5 +1,6 @@
 class GlobalBoard extends Board {
   Board boardArr[][];
+  float localSizeMultiplier = 0.80; // For local board scaling
 
   GlobalBoard(int newBoardSize, float newDrawSize) {
     super(newBoardSize, newDrawSize);
@@ -8,7 +9,7 @@ class GlobalBoard extends Board {
     for (int x = 0; x < boardSize; x++) {
       for (int y = 0; y < boardSize; y++) {
         if (boardArr[x][y] == null) {
-          boardArr[x][y] = new Board(boardSize, (drawSize / boardSize) * 0.80);
+          boardArr[x][y] = new Board(boardSize, (drawSize / boardSize) * localSizeMultiplier);
         } else {
           continue;
         }
@@ -16,7 +17,7 @@ class GlobalBoard extends Board {
     }
   }
 
-  void updateGlobalBoard() { // Updates the pieces of the global board to the winner of every board in it
+  void updateGlobalBoard() { // Updates the pieces of the global board to the winner of every local board in it
     for (int x = 0; x < boardSize; x++) {
       for (int y = 0; y < boardSize; y++) {
         pieceArr[x][y] = boardArr[x][y].getWinner();
@@ -47,13 +48,13 @@ class GlobalBoard extends Board {
 
     if (gridClickX >= 0 && gridClickX < boardSize && gridClickY >= 0 && gridClickY < boardSize) {
       Board clickedBoard = boardArr[gridClickX][gridClickY];
-      float boardOffsetX = (gridClickX * clickedBoard.drawSize);
-      float boardOffsetY = (gridClickY * clickedBoard.drawSize);
+      float boardOffsetX = (gridClickX * pieceSize);
+      float boardOffsetY = (gridClickY * pieceSize);
       float centerOffset = (pieceSize - clickedBoard.drawSize) / 2;
 
       if (clickedBoard.getWinner() == 0) {
         println("Global Board:", gridClickX, gridClickY);
-        clickedBoard.mousePressed(posX + boardOffsetX + centerOffset, posY + boardOffsetY + centerOffset, side); // Needs cleanup
+        clickedBoard.mousePressed(posX + boardOffsetX + centerOffset, posY + boardOffsetY + centerOffset, side);
       }
     }
   }
