@@ -31,7 +31,7 @@ class Board {
 class GlobalBoard extends Board {
   Board boardArr[][];
 
-  GlobalBoard(int newBoardSize, int newDrawSize) {
+  GlobalBoard(int newBoardSize, float newDrawSize) {
     super(newBoardSize, newDrawSize);
     boardArr = new Board[boardSize][boardSize];
 
