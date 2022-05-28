@@ -46,7 +46,7 @@ class Board {
     int gridClickX = floor((mouseX - posX) / pieceSize);
     int gridClickY = floor((mouseY - posY) / pieceSize);
     if (gridClickX >= 0 && gridClickX < boardSize && gridClickY >= 0 && gridClickY < boardSize) {
-      doMove(gridClickX, gridClickY, 'X');
+      doMove(gridClickX, gridClickY, side);
       println("Board:", gridClickX, gridClickY);
     }
   }
