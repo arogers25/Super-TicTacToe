@@ -61,7 +61,8 @@ class GlobalBoard extends Board {
     for (int x = 0; x < boardSize; x++) {
       for (int y = 0; y < boardSize; y++) {
         Board current = boardArr[x][y];
-        current.draw(posX + (x * current.drawSize), posY + (y * current.drawSize));
+        float centerOffset = (pieceSize - current.drawSize) / 2;
+        current.draw(posX + centerOffset + (x * pieceSize), posY + centerOffset + (y * pieceSize));
       }
     }
     
