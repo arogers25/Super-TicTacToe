@@ -37,7 +37,7 @@ class GlobalBoard extends Board {
           fill(current.getWinner() == 'X' ? color(255, 0, 0, 150) : color(0, 0, 255, 150));
           rect(posX + (x * pieceSize), posY + (y * pieceSize), pieceSize, pieceSize);
         } else {
-          if (currentPlayBoard == null || currentPlayBoard == current) {
+          if (currentPlayBoard == null || currentPlayBoard == current) { // Move to LocalBoard.draw()
             noStroke();
             fill(color(0, 255, 0, 100));
             rect(posX + (x * pieceSize), posY + (y * pieceSize), pieceSize, pieceSize);
