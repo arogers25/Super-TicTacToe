@@ -31,6 +31,11 @@ class GlobalBoard extends Board {
         Board current = boardArr[x][y];
         float centerOffset = (pieceSize - current.drawSize) / 2;
         current.draw(posX + (x * pieceSize) + centerOffset, posY + (y * pieceSize) + centerOffset);
+        if (current.getWinner() != 0) {
+          noStroke();
+          fill(current.getWinner() == 'X' ? color(255, 0, 0, 150) : color(0, 0, 255, 150));
+          rect(posX + (x * pieceSize), posY + (y * pieceSize), pieceSize, pieceSize);
+        }
       }
     }
   }
@@ -39,8 +44,8 @@ class GlobalBoard extends Board {
     posX += (width / 2) - (drawSize / 2);
     posY += (height / 2) - (drawSize / 2);
 
-    drawPieces(posX, posY);
     drawGrid(posX, posY, drawSize, pieceSize, boardSize, color(0));
+    drawPieces(posX, posY);
   }
 
   boolean validClick(float posX, float posY, char side) { //TODO cleanup

@@ -9,6 +9,7 @@ void drawGrid(float x, float y, float w, float boxSize, int boxes, color col) {
 }
 
 void drawX(float x, float y, float w) {
+  noFill();
   strokeWeight(7.0);
   stroke(color(255, 0, 0));
   line(x, y, x + w, y + w);
@@ -16,6 +17,7 @@ void drawX(float x, float y, float w) {
 }
 
 void drawO(float x, float y, float w) {
+  noFill();
   strokeWeight(7.0);
   stroke(color(0, 0, 255));
   circle(x + (w / 2), y + (w / 2), w);
