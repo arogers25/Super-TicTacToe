@@ -8,10 +8,21 @@ void drawGrid(float x, float y, float w, float boxSize, int boxes, color col) {
   }
 }
 
+color getSideColor(char side, int newAlpha) {
+  switch (side) {
+  case 'X':
+    return color(255, 0, 0, newAlpha);
+  case 'O':
+    return color(0, 0, 255, newAlpha);
+  default:
+    return color(120, 120, 120, newAlpha);
+  }
+}
+
 void drawX(float x, float y, float w) {
   noFill();
   strokeWeight(7.0);
-  stroke(color(255, 0, 0));
+  stroke(getSideColor('X', 255));
   line(x, y, x + w, y + w);
   line(x + w, y, x, y + w);
 }
@@ -19,6 +30,7 @@ void drawX(float x, float y, float w) {
 void drawO(float x, float y, float w) {
   noFill();
   strokeWeight(7.0);
+  stroke(getSideColor('O', 255));
   stroke(color(0, 0, 255));
   circle(x + (w / 2), y + (w / 2), w);
 }

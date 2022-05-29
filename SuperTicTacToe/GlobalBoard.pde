@@ -34,7 +34,7 @@ class GlobalBoard extends Board {
         current.draw(posX + (x * pieceSize) + centerOffset, posY + (y * pieceSize) + centerOffset);
         if (current.getWinner() != 0) {
           noStroke();
-          fill(current.getWinner() == 'X' ? color(255, 0, 0, 150) : color(0, 0, 255, 150));
+          fill(getSideColor(current.getWinner(), 150));
           rect(posX + (x * pieceSize), posY + (y * pieceSize), pieceSize, pieceSize);
         }
       }
