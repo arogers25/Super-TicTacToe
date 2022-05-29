@@ -33,13 +33,17 @@ class Board {
     drawPieces(posX, posY);
   }
 
-  void mousePressed(float posX, float posY, char side) {
+  boolean mousePressed(float posX, float posY, char side) {
     int gridClickX = floor((mouseX - posX) / pieceSize);
     int gridClickY = floor((mouseY - posY) / pieceSize);
-    if (gridClickX >= 0 && gridClickX < boardSize && gridClickY >= 0 && gridClickY < boardSize) {
+    
+    if (gridClickX >= 0 && gridClickX < boardSize && gridClickY >= 0 && gridClickY < boardSize && pieceArr[gridClickX][gridClickY] == 0) {
       doMove(gridClickX, gridClickY, side);
       println("Board:", gridClickX, gridClickY);
+      return true;
     }
+    
+    return false;
   }
 
   char getWinner() {

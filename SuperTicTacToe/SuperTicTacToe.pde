@@ -12,5 +12,5 @@ void draw() {
 }
 
 void mousePressed() {
-  globalBoard.mousePressed(0, 0, 'X');
+  println(globalBoard.mousePressed(0, 0, 'X'));
 }
