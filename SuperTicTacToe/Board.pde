@@ -28,11 +28,6 @@ class Board {
     }
   }
   
-  void draw(float posX, float posY) {
-    drawGrid(posX, posY, drawSize, pieceSize, boardSize, color(170));
-    drawPieces(posX, posY);
-  }
-
   boolean validClick(float posX, float posY, char side) {
     int gridClickX = floor((mouseX - posX) / pieceSize);
     int gridClickY = floor((mouseY - posY) / pieceSize);
@@ -48,5 +43,10 @@ class Board {
 
   char getWinner() {
     return 0;
+  }
+  
+  void draw(float posX, float posY) {
+    drawGrid(posX, posY, drawSize, pieceSize, boardSize, color(170));
+    drawPieces(posX, posY);
   }
 }
