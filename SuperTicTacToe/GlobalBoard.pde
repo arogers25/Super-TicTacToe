@@ -63,11 +63,11 @@ class GlobalBoard extends Board {
       if (clickedBoard.getWinner() == 0) {
         println("Global Board:", gridClickX, gridClickY);
         if (clickedBoard.validClick(posX + boardOffsetX + centerOffset, posY + boardOffsetY + centerOffset, side)) {
+          updateGlobalBoard(); // Put this in a different place
           return true;
         }
       }
     }
-    updateGlobalBoard(); // Put this in a different place
     return false;
   }
 }

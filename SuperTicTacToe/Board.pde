@@ -24,7 +24,7 @@ class Board {
     return availableMoves;
   }
   
-  char checkRowWinner() {
+  char getRowWinner() {
     for (int y = 0; y < boardSize; y++) {
       for (int x = 0; x < boardSize; x++) {
         if (pieceArr[0][y] != pieceArr[x][y] || pieceArr[x][y] == 0) {
@@ -39,7 +39,7 @@ class Board {
     return 0;
   }
   
-  char checkColWinner() {
+  char getColWinner() {
     for (int x = 0; x < boardSize; x++) {
       for (int y = 0; y < boardSize; y++) {
         if (pieceArr[x][0] != pieceArr[x][y] || pieceArr[x][y] == 0) {
@@ -54,7 +54,7 @@ class Board {
     return 0;
   }
 
-  char checkDiagsWinner() {
+  char getDiagsWinner() {
     for (int i = 0; i < boardSize; i++) { // Diagonal check
       if (pieceArr[0][0] != pieceArr[i][i] || pieceArr[i][i] == 0) {
         break;
@@ -78,14 +78,14 @@ class Board {
   }
 
   char getWinner() { // TODO cleanup all check winner methods
-    if (checkRowWinner() != 0) {
-      return checkRowWinner();
+    if (getRowWinner() != 0) {
+      return getRowWinner();
     }
-    if (checkColWinner() != 0) {
-      return checkColWinner();
+    if (getColWinner() != 0) {
+      return getColWinner();
     }
-    if (checkDiagsWinner() != 0) {
-      return checkDiagsWinner();
+    if (getDiagsWinner() != 0) {
+      return getDiagsWinner();
     }
     if (getAvailableMoves().size() == 0) {
       return 'T';

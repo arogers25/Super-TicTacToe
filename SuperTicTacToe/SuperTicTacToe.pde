@@ -9,6 +9,7 @@ void setup() {
 
 void draw() {
   background(255);
+  println(currentGame.gameBoard.getWinner());
   currentGame.draw();
 }
 
