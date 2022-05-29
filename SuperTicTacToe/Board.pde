@@ -27,7 +27,7 @@ class Board {
       pieceArr[moveX][moveY] = side;
     }
   }
-
+  
   void draw(float posX, float posY) {
     drawGrid(posX, posY, drawSize, pieceSize, boardSize, color(170));
     drawPieces(posX, posY);
