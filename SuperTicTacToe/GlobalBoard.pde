@@ -54,7 +54,7 @@ class GlobalBoard extends Board {
     int gridClickX = floor((mouseX - posX) / pieceSize);
     int gridClickY = floor((mouseY - posY) / pieceSize);
 
-    if (gridClickX >= 0 && gridClickX < boardSize && gridClickY >= 0 && gridClickY < boardSize) {
+    if (gridClickX >= 0 && gridClickX < boardSize && gridClickY >= 0 && gridClickY < boardSize && getWinner() == 0) {
       Board clickedBoard = boardArr[gridClickX][gridClickY];
       float boardOffsetX = (gridClickX * pieceSize);
       float boardOffsetY = (gridClickY * pieceSize);
