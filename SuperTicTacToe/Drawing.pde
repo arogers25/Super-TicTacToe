@@ -1,5 +1,5 @@
 void drawGrid(float x, float y, float w, float boxSize, int boxes, color col) {
-  strokeWeight(7.0);
+  strokeWeight(9.0);
   stroke(col);
 
   for (int i = 1; i < boxes; i++) {

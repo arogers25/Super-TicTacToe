@@ -33,7 +33,7 @@ class Board {
     drawPieces(posX, posY);
   }
 
-  boolean mousePressed(float posX, float posY, char side) {
+  boolean validClick(float posX, float posY, char side) {
     int gridClickX = floor((mouseX - posX) / pieceSize);
     int gridClickY = floor((mouseY - posY) / pieceSize);
     

@@ -23,7 +23,7 @@ class Game {
   }
   
   void mousePressed() {
-    if (gameBoard.mousePressed(0, 0, currentSide)) {
+    if (gameBoard.validClick(0, 0, currentSide)) {
       switchSides();
     }
   }
