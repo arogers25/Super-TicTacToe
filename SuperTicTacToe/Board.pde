@@ -78,13 +78,13 @@ class Board {
   }
 
   char getWinner() { // TODO cleanup all check winner methods
-    if (getRowWinner() != 0) {
+    if (getRowWinner() != 0 && getRowWinner() != 'T') {
       return getRowWinner();
     }
-    if (getColWinner() != 0) {
+    if (getColWinner() != 0 && getColWinner() != 'T') {
       return getColWinner();
     }
-    if (getDiagsWinner() != 0) {
+    if (getDiagsWinner() != 0 && getDiagsWinner() != 'T') {
       return getDiagsWinner();
     }
     if (getAvailableMoves().size() == 0) {
