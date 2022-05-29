@@ -10,4 +10,17 @@ class Game {
     startingSide = newStartingSide;
     currentSide = startingSide;
   }
+  
+  void switchSides() {
+    if (currentSide == 'X') {
+      currentSide = 'O';
+    } else {
+      currentSide = 'X';
+    }
+  }
+  
+  void mousePressed() {
+    gameBoard.mousePressed(0, 0, currentSide);
+    switchSides();
+  }
 }
