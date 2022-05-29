@@ -1,7 +1,6 @@
 class GlobalBoard extends Board {
   Board boardArr[][];
   float localSizeMultiplier = 0.80; // For local board scaling
-  char currentSide = 'X';
 
   GlobalBoard(int newBoardSize, float newDrawSize) {
     super(newBoardSize, newDrawSize);
@@ -26,15 +25,6 @@ class GlobalBoard extends Board {
     }
   }
 
-  void switchSides() {
-    if (currentSide == 'X') {
-      currentSide = 'O';
-    } else {
-      currentSide = 'X';
-    }
-  }
-
-
   void drawPieces(float posX, float posY) { // A local board is a piece on a global board
     for (int x = 0; x < boardSize; x++) {
       for (int y = 0; y < boardSize; y++) {
@@ -53,7 +43,7 @@ class GlobalBoard extends Board {
     drawGrid(posX, posY, drawSize, pieceSize, boardSize, color(0));
   }
 
-  void mousePressed(float posX, float posY) { //TODO cleanup
+  void mousePressed(float posX, float posY, char side) { //TODO cleanup
     posX += (width / 2) - (drawSize / 2);
     posY += (height / 2) - (drawSize / 2);
     int gridClickX = floor((mouseX - posX) / pieceSize);
@@ -67,8 +57,7 @@ class GlobalBoard extends Board {
 
       if (clickedBoard.getWinner() == 0) {
         println("Global Board:", gridClickX, gridClickY);
-        clickedBoard.mousePressed(posX + boardOffsetX + centerOffset, posY + boardOffsetY + centerOffset, currentSide);
-        switchSides();
+        clickedBoard.mousePressed(posX + boardOffsetX + centerOffset, posY + boardOffsetY + centerOffset, side);
       }
     }
     updateGlobalBoard(); // Put this in a different place
