@@ -1,16 +1,16 @@
-GlobalBoard globalBoard;
+Game currentGame;
 
 void setup() {
   strokeCap(SQUARE);
   fullScreen();
-  globalBoard = new GlobalBoard(3, height);
+  currentGame = new Game(new GlobalBoard(3, height), 'X');
 }
 
 void draw() {
   background(255);
-  globalBoard.draw(0, 0);
+  currentGame.draw();
 }
 
 void mousePressed() {
-  println(globalBoard.mousePressed(0, 0, 'X'));
+  currentGame.mousePressed();
 }
