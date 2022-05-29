@@ -10,7 +10,7 @@ void setup() {
 
 void draw() {
   background(255);
-  globalBoard.draw(0, 0);
+  currentGame.draw();
 }
 
 void mousePressed() {

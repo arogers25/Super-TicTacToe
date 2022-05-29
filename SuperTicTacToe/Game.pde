@@ -19,6 +19,11 @@ class Game {
     }
   }
   
+  void draw() {
+    gameBoard.draw(0, 0);
+    drawPiece(0, 0, 100, currentSide);
+  }
+  
   void mousePressed() {
     gameBoard.mousePressed(0, 0, currentSide);
     switchSides();

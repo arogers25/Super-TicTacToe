@@ -16,16 +16,7 @@ class Board {
       for (int y = 0; y < boardSize; y++) {
         if (pieceArr[x][y] != 0) {
           float pieceOffset = pieceSize / 4;
-          switch (pieceArr[x][y]) {
-          case 'X':
-            drawX(posX + (x * pieceSize) + pieceOffset, posY + (y * pieceSize) + pieceOffset, pieceSize / 2);
-            break;
-          case 'O':
-            drawO(posX + (x * pieceSize) + pieceOffset, posY + (y * pieceSize) + pieceOffset, pieceSize / 2);
-            break;
-          default:
-            break;
-          }
+          drawPiece(posX + (x * pieceSize) + pieceOffset, posY + (y * pieceSize) + pieceOffset, pieceSize / 2, pieceArr[x][y]);
         }
       }
     }
