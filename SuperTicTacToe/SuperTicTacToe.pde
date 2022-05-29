@@ -3,7 +3,8 @@ Game currentGame;
 void setup() {
   strokeCap(SQUARE);
   fullScreen();
-  currentGame = new Game(new GlobalBoard(3, height), 'X');
+  GlobalBoard newGameBoard = new GlobalBoard(3, height);
+  currentGame = new Game(newGameBoard, 'X');
 }
 
 void draw() {
