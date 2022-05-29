@@ -25,8 +25,8 @@ class GlobalBoard extends Board {
       }
     }
   }
-  
-   void switchSides() {
+
+  void switchSides() {
     if (currentSide == 'X') {
       currentSide = 'O';
     } else {
@@ -34,7 +34,7 @@ class GlobalBoard extends Board {
     }
   }
 
-  
+
   void drawPieces(float posX, float posY) { // A local board is a piece on a global board
     for (int x = 0; x < boardSize; x++) {
       for (int y = 0; y < boardSize; y++) {
@@ -48,13 +48,12 @@ class GlobalBoard extends Board {
   void draw(float posX, float posY) { // The global board is meant to be centered, so posX and posY should be 0
     posX += (width / 2) - (drawSize / 2);
     posY += (height / 2) - (drawSize / 2);
-    
+
     drawPieces(posX, posY);
     drawGrid(posX, posY, drawSize, pieceSize, boardSize, color(0));
   }
 
   void mousePressed(float posX, float posY) { //TODO cleanup
-    updateGlobalBoard(); // Put this in a different place
     posX += (width / 2) - (drawSize / 2);
     posY += (height / 2) - (drawSize / 2);
     int gridClickX = floor((mouseX - posX) / pieceSize);
@@ -72,5 +71,6 @@ class GlobalBoard extends Board {
         switchSides();
       }
     }
+    updateGlobalBoard(); // Put this in a different place
   }
 }
