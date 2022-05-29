@@ -1,15 +1,16 @@
 class GlobalBoard extends Board {
-  Board boardArr[][];
+  LocalBoard boardArr[][];
+  LocalBoard currentPlayBoard;
   float localSizeMultiplier = 0.80; // For local board scaling
 
   GlobalBoard(int newBoardSize, float newDrawSize) {
     super(newBoardSize, newDrawSize);
-    boardArr = new Board[boardSize][boardSize];
+    boardArr = new LocalBoard[boardSize][boardSize];
 
     for (int x = 0; x < boardSize; x++) {
       for (int y = 0; y < boardSize; y++) {
         if (boardArr[x][y] == null) {
-          boardArr[x][y] = new Board(boardSize, (drawSize / boardSize) * localSizeMultiplier);
+          boardArr[x][y] = new LocalBoard(this, boardSize, (drawSize / boardSize) * localSizeMultiplier);
         } else {
           continue;
         }
@@ -35,6 +36,12 @@ class GlobalBoard extends Board {
           noStroke();
           fill(current.getWinner() == 'X' ? color(255, 0, 0, 150) : color(0, 0, 255, 150));
           rect(posX + (x * pieceSize), posY + (y * pieceSize), pieceSize, pieceSize);
+        } else {
+          if (currentPlayBoard == null || currentPlayBoard == current) {
+            noStroke();
+            fill(color(0, 255, 0, 100));
+            rect(posX + (x * pieceSize), posY + (y * pieceSize), pieceSize, pieceSize);
+          }
         }
       }
     }
@@ -60,7 +67,7 @@ class GlobalBoard extends Board {
       float boardOffsetY = (gridClickY * pieceSize);
       float centerOffset = (pieceSize - clickedBoard.drawSize) / 2;
 
-      if (clickedBoard.getWinner() == 0) {
+      if ((currentPlayBoard == null && clickedBoard.getWinner() == 0) || clickedBoard == currentPlayBoard) {
         println("Global Board:", gridClickX, gridClickY);
         if (clickedBoard.validClick(posX + boardOffsetX + centerOffset, posY + boardOffsetY + centerOffset, side)) {
           updateGlobalBoard(); // Put this in a different place
