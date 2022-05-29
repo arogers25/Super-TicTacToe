@@ -40,6 +40,19 @@ class Board {
     
     return false;
   }
+  
+  ArrayList<int[]> getAvailableMoves() {
+    ArrayList<int[]> availableMoves = new ArrayList<int[]>();
+    
+    for (int x = 0; x < boardSize; x++) {
+      for (int y = 0; y < boardSize; y++) {
+        if (pieceArr[x][y] == 0) {
+          availableMoves.add(new int[]{x, y});
+        }
+      }
+    }
+    return availableMoves;
+  }
 
   char getWinner() {
     return 0;
