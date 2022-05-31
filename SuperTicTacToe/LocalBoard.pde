@@ -9,13 +9,13 @@ class LocalBoard extends Board {
   void doMove(int moveX, int moveY, char side) {
     if (pieceArr[moveX][moveY] == 0) {
       pieceArr[moveX][moveY] = side;
-    }
-
-    LocalBoard boardToMove = parentBoard.boardArr[moveX][moveY];
-    if (boardToMove.getWinner() != 0) {
-      parentBoard.currentPlayBoard = null;
-    } else {
-      parentBoard.currentPlayBoard = boardToMove;
+      
+      LocalBoard boardToMove = parentBoard.boardArr[moveX][moveY];
+      if (boardToMove.getWinner() != 0) {
+        parentBoard.currentPlayBoard = null;
+      } else {
+        parentBoard.currentPlayBoard = boardToMove;
+      }
     }
   }
 
