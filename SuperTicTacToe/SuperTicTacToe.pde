@@ -4,9 +4,11 @@ Button newButton;
 void setup() {
   strokeCap(SQUARE);
   fullScreen();
+  gameFont = createFont("Arial", 32);
+  textFont(gameFont);
   GlobalBoard newGameBoard = new GlobalBoard(3, height);
   currentGame = new Game(newGameBoard, 'X');
-  newButton = new Button("Test", 100, 100, 100, 100);
+  newButton = new Button("Test", 100, 100, 200, 200);
 }
 
 void draw() {
