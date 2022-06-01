@@ -2,13 +2,15 @@ class Button {
   float x, y, w, h;
   String label;
   boolean hovering;
+  color col;
   
-  Button(String newLabel, float newX, float newY, float newW, float newH) {
+  Button(String newLabel, float newX, float newY, float newW, float newH, color newCol) {
     label = newLabel;
     x = newX;
     y = newY;
     w = newW;
     h = newH;
+    col = newCol;
   }
   
   void draw() {
@@ -16,13 +18,13 @@ class Button {
     
     stroke(0);
     strokeWeight(1);
-    fill(255);
+    fill(col);
     rect(x, y, w, h);
     textAlign(CENTER, CENTER);
     fill(0);
-    text(label, x + w / 2, (y + w / 2) - textDescent());
+    text(label, x + w / 2, (y + h / 2) - (textDescent() / 2));
     if (hovering) {
-      fill(color(0, 255, 0, 100));
+      fill(color(255, 255, 255, 100));
       rect(x, y, w, h);
     }
   }

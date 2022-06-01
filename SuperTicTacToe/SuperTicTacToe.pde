@@ -6,9 +6,9 @@ void setup() {
   fullScreen();
   gameFont = createFont("Arial", 32);
   textFont(gameFont);
-  GlobalBoard newGameBoard = new GlobalBoard(3, height);
+  GlobalBoard newGameBoard = new GlobalBoard(3, height * 0.70);
   currentGame = new Game(newGameBoard, 'X');
-  newButton = new Button("Test", 100, 100, 200, 200);
+  newButton = new Button("Exit", width - 100, 0, 100, 100, color(255, 0, 0));
 }
 
 void draw() {
@@ -24,6 +24,6 @@ void draw() {
 void mousePressed() {
   currentGame.mousePressed();
   if (newButton.hovering) {
-    println("Test");
+    exit();
   }
 }
