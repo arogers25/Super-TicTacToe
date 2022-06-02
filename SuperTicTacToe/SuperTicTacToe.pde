@@ -27,3 +27,10 @@ void mousePressed() {
     exit();
   }
 }
+
+void keyPressed() {
+  if (key == 's') {
+    currentGame.save();
+    println("saved");
+  }
+}

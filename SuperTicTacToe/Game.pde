@@ -17,6 +17,30 @@ class Game {
     }
   }
   
+  JSONArray saveLocalBoard(LocalBoard localBoard) {
+    JSONArray savedBoard = new JSONArray();
+    for (int x = 0; x < localBoard.boardSize; x++) {
+      JSONArray colArr = new JSONArray();
+      for (int y = 0; y < localBoard.boardSize; y++) {
+        colArr.setString(y, Character.toString(localBoard.pieceArr[x][y]));
+      }
+      savedBoard.setJSONArray(x, colArr);
+    }
+    return savedBoard;
+  }
+  
+  void save() {
+    JSONArray savedBoard = new JSONArray();
+    for (int x = 0; x < gameBoard.boardSize; x++) {
+      JSONArray colArr = new JSONArray();
+      for (int y = 0; y < gameBoard.boardSize; y++) {
+        colArr.setJSONArray(y, saveLocalBoard(gameBoard.boardArr[x][y]));
+      }
+      savedBoard.setJSONArray(x, colArr);
+    }
+    println(savedBoard.getJSONArray(2));
+  }
+  
   void draw() {
     gameBoard.draw(0, 0);
     drawPiece(10, 10, 70, currentSide);
