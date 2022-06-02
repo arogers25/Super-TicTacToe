@@ -41,6 +41,9 @@ class Game {
     println(savedBoard.getJSONArray(2));
   }
   
+  void load() {
+  }
+  
   void draw() {
     gameBoard.draw(0, 0);
     drawPiece(10, 10, 70, currentSide);

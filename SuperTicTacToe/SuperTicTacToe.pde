@@ -31,6 +31,10 @@ void mousePressed() {
 void keyPressed() {
   if (key == 's') {
     currentGame.save();
-    println("saved");
+    println("Saved");
+  }
+  if (key == 'r') {
+    currentGame.load();
+    println("Loaded");
   }
 }
