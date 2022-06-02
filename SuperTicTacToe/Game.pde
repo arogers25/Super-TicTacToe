@@ -39,9 +39,11 @@ class Game {
       }
       savedBoard.setJSONArray(x, colArr);
     }
+    saveJSONArray(savedBoard, "board.json");
   }
   
   void load() {
+    savedBoard = loadJSONArray("board.json");
     for (int globalX = 0; globalX < 3; globalX++) {
       for (int globalY = 0; globalY < 3; globalY++) {
         for (int x = 0; x < 3; x++) {
