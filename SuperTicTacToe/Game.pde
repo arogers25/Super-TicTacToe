@@ -20,15 +20,15 @@ class Game {
   }
 
   JSONArray saveLocalBoard(LocalBoard localBoard) {
-    JSONArray savedBoard = new JSONArray();
+    JSONArray savedLocalBoard = new JSONArray();
     for (int x = 0; x < localBoard.boardSize; x++) {
       JSONArray colArr = new JSONArray();
       for (int y = 0; y < localBoard.boardSize; y++) {
-        colArr.setString(y, Character.toString(localBoard.pieceArr[x][y]));
+        colArr.setInt(y, localBoard.pieceArr[x][y]);
       }
-      savedBoard.setJSONArray(x, colArr);
+      savedLocalBoard.setJSONArray(x, colArr);
     }
-    return savedBoard;
+    return savedLocalBoard;
   }
 
   void save() {
@@ -42,7 +42,9 @@ class Game {
   }
 
   void load() {
-    println(savedBoard.getJSONArray(2));
+    int testX = 2;
+    int testY = 1;
+    println(savedBoard.getJSONArray(0).getJSONArray(0).getJSONArray(testX).getInt(testY));
   }
 
   void draw() {
