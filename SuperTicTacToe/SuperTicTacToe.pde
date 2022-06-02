@@ -34,7 +34,7 @@ void keyPressed() {
     println("Saved");
   }
   if (key == 'r') {
-    currentGame.load();
+    currentGame.testLoad();
     println("Loaded");
   }
 }

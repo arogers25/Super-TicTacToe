@@ -40,11 +40,17 @@ class Game {
       savedBoard.setJSONArray(x, colArr);
     }
   }
-
+  
   void load() {
-    int testX = 2;
-    int testY = 1;
-    println(savedBoard.getJSONArray(0).getJSONArray(0).getJSONArray(testX).getInt(testY));
+    for (int globalX = 0; globalX < 3; globalX++) {
+      for (int globalY = 0; globalY < 3; globalY++) {
+        for (int x = 0; x < 3; x++) {
+          for (int y = 0; y < 3; y++) {
+            gameBoard.boardArr[globalX][globalY].pieceArr[x][y] = (char)savedBoard.getJSONArray(globalX).getJSONArray(globalY).getJSONArray(x).getInt(y);
+          }
+        }
+      }
+    }
   }
 
   void draw() {
