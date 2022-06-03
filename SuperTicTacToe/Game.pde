@@ -52,7 +52,7 @@ class Game {
     currentSide = (char)savedGame.getInt("currentSide");
     int boardSize = gameBoard.boardSize;
     if (savedGame.getInt("playBoardX") >= 0 && savedGame.getInt("playBoardX") < boardSize) { // TODO cleanup
-      gameBoard.currentPlayBoard = gameBoard.boardArr[savedGame.getInt("playBoardY")][savedGame.getInt("playBoardY")];
+      gameBoard.currentPlayBoard = gameBoard.boardArr[savedGame.getInt("playBoardX")][savedGame.getInt("playBoardY")];
     } else {
       gameBoard.currentPlayBoard = null;
     }
