@@ -47,6 +47,11 @@ class Game {
   }
   
   void load() {
+    if (loadStrings("saveFile.json") == null) {
+      println("Savefile does not exist!");
+      return;
+    }
+    
     savedGame = loadJSONObject("saveFile.json");
     JSONArray savedBoard = savedGame.getJSONArray("gameBoard");
     currentSide = (char)savedGame.getInt("currentSide");
@@ -67,6 +72,7 @@ class Game {
         }
       }
     }
+    gameBoard.updateGlobalBoard();
   }
 
   void draw() {
