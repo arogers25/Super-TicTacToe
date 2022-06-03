@@ -2,13 +2,14 @@ class Game {
   char startingSide = 'X';
   char currentSide = 0;
   GlobalBoard gameBoard;
-  JSONArray savedBoard;
+  JSONObject savedGame;
 
   Game(GlobalBoard newGameBoard, char newStartingSide) {
     gameBoard = newGameBoard;
     startingSide = newStartingSide;
     currentSide = startingSide;
-    savedBoard = new JSONArray();
+    savedGame = new JSONObject();
+    savedGame.setJSONArray("gameBoard", new JSONArray());
   }
 
   void switchSides() {
@@ -30,25 +31,31 @@ class Game {
     }
     return savedLocalBoard;
   }
-
+  
   void save() {
+    savedGame.setInt("currentSide", currentSide);
     for (int x = 0; x < gameBoard.boardSize; x++) {
       JSONArray colArr = new JSONArray();
       for (int y = 0; y < gameBoard.boardSize; y++) {
         colArr.setJSONArray(y, saveLocalBoard(gameBoard.boardArr[x][y]));
       }
-      savedBoard.setJSONArray(x, colArr);
+      savedGame.getJSONArray("gameBoard").setJSONArray(x, colArr);
     }
-    saveJSONArray(savedBoard, "board.json");
+    saveJSONObject(savedGame, "saveFile.json");
   }
   
   void load() {
-    savedBoard = loadJSONArray("board.json");
-    for (int globalX = 0; globalX < 3; globalX++) {
-      for (int globalY = 0; globalY < 3; globalY++) {
-        for (int x = 0; x < 3; x++) {
-          for (int y = 0; y < 3; y++) {
-            gameBoard.boardArr[globalX][globalY].pieceArr[x][y] = (char)savedBoard.getJSONArray(globalX).getJSONArray(globalY).getJSONArray(x).getInt(y);
+    savedGame = loadJSONObject("saveFile.json");
+    JSONArray savedBoard = savedGame.getJSONArray("gameBoard");
+    currentSide = (char)savedGame.getInt("currentSide");
+    int boardSize = gameBoard.boardSize;
+    
+    for (int globalX = 0; globalX < boardSize; globalX++) {
+      for (int globalY = 0; globalY < boardSize; globalY++) {
+        for (int x = 0; x < boardSize; x++) {
+          for (int y = 0; y < boardSize; y++) {
+            char boardPiece = (char)savedBoard.getJSONArray(globalX).getJSONArray(globalY).getJSONArray(x).getInt(y);
+            gameBoard.boardArr[globalX][globalY].pieceArr[x][y] = boardPiece;
           }
         }
       }
