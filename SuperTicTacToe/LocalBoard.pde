@@ -13,8 +13,12 @@ class LocalBoard extends Board {
       LocalBoard boardToMove = parentBoard.boardArr[moveX][moveY];
       if (boardToMove.getWinner() != 0) {
         parentBoard.currentPlayBoard = null;
+        parentBoard.playBoardX = -1;
+        parentBoard.playBoardY = -1;
       } else {
         parentBoard.currentPlayBoard = boardToMove;
+        parentBoard.playBoardX = moveX;
+        parentBoard.playBoardY = moveY;
       }
     }
   }

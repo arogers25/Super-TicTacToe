@@ -34,6 +34,8 @@ class Game {
   
   void save() {
     savedGame.setInt("currentSide", currentSide);
+    savedGame.setInt("playBoardX", gameBoard.playBoardX);
+    savedGame.setInt("playBoardY", gameBoard.playBoardY);
     for (int x = 0; x < gameBoard.boardSize; x++) {
       JSONArray colArr = new JSONArray();
       for (int y = 0; y < gameBoard.boardSize; y++) {
@@ -49,6 +51,11 @@ class Game {
     JSONArray savedBoard = savedGame.getJSONArray("gameBoard");
     currentSide = (char)savedGame.getInt("currentSide");
     int boardSize = gameBoard.boardSize;
+    if (savedGame.getInt("playBoardX") >= 0 && savedGame.getInt("playBoardX") < boardSize) { // TODO cleanup
+      gameBoard.currentPlayBoard = gameBoard.boardArr[savedGame.getInt("playBoardY")][savedGame.getInt("playBoardY")];
+    } else {
+      gameBoard.currentPlayBoard = null;
+    }
     
     for (int globalX = 0; globalX < boardSize; globalX++) {
       for (int globalY = 0; globalY < boardSize; globalY++) {

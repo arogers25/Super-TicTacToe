@@ -2,6 +2,8 @@ class GlobalBoard extends Board {
   LocalBoard boardArr[][];
   LocalBoard currentPlayBoard;
   float localSizeMultiplier = 0.80; // For local board scaling
+  int playBoardX = -1;
+  int playBoardY = -1; // Replace these
 
   GlobalBoard(int newBoardSize, float newDrawSize) {
     super(newBoardSize, newDrawSize);
