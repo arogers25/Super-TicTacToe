@@ -21,6 +21,8 @@ class Button {
     fill(col);
     rect(x, y, w, h);
     textAlign(CENTER, CENTER);
+    int newTextSize = 32;
+    while (textWidth(label) > w) textSize(newTextSize--);
     fill(0);
     text(label, x + w / 2, (y + h / 2) - (textDescent() / 2));
     if (hovering) {
