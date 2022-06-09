@@ -30,4 +30,41 @@ class Button {
       rect(x, y, w, h);
     }
   }
+  
+  void input() {
+  }
+  
+}
+
+class ButtonList extends Button{
+  ArrayList<Button> buttons;
+  int value = 0;
+  
+  ButtonList(String[] optionsList, float newX, float newY, float newW, float newH, color newCol) {
+    super("", 0, 0, 0, 0, 0);
+    buttons = new ArrayList<Button>();
+    float buttonW = newW / optionsList.length;
+    for (int i = 0; i < optionsList.length; i++) {
+      buttons.add(new Button(optionsList[i], newX + buttonW * i, newY, buttonW, newH, color(200)));
+    }
+  }
+  
+  void draw() {
+    for (int i = 0; i < buttons.size(); i++) {
+      if (value == i) {
+        buttons.get(i).col = color(170);
+      } else {
+        buttons.get(i).col = color(200);
+      }
+      buttons.get(i).draw();
+    }
+  }
+  
+  void input() {
+    for (int i = 0; i < buttons.size(); i++) {
+      if (buttons.get(i).hovering) {
+        value = i;
+      }
+    }
+  }
 }
