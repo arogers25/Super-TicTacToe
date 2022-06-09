@@ -33,8 +33,8 @@ class MainMenu extends Menu {
     super();
     float optionY = (height / 2);
     float optionH = (height * 0.07);
-    testButton = new Button("Play", (width / 2) - (width * 0.15), optionY + optionH * 3, width * 0.3, optionH, color(100, 255, 100));
-    testButtonList = new ButtonList(new String[]{"Test", "Test 2", "Test 3"}, 100, 100, 300, 100, color(200));
+    testButton = new Button("Play", (width * 0.35), optionY + optionH * 3, width * 0.3, optionH, color(100, 255, 100));
+    testButtonList = new ButtonList(new String[]{"Zero Players", "One Player", "Two Players"}, width * 0.35, height * 0.4, width * 0.3, optionH, color(200));
     buttonListVal = testButtonList.value;
     buttons.add(testButtonList);
     buttons.add(testButton);
