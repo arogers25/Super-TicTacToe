@@ -41,11 +41,11 @@ class ButtonList extends Button{
   int value = 0;
   
   ButtonList(String[] optionsList, float newX, float newY, float newW, float newH, color newCol) {
-    super("", 0, 0, 0, 0, 0);
+    super("", newX, newY, newW, newH, newCol);
     buttons = new ArrayList<Button>();
-    float buttonW = newW / optionsList.length;
+    float buttonW = w / optionsList.length;
     for (int i = 0; i < optionsList.length; i++) {
-      buttons.add(new Button(optionsList[i], newX + buttonW * i, newY, buttonW, newH, color(200)));
+      buttons.add(new Button(optionsList[i], x + buttonW * i, y, buttonW, newH, col));
     }
   }
   
