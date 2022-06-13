@@ -42,6 +42,8 @@ class Game {
     savedGame.setInt("currentSide", currentSide);
     savedGame.setInt("playBoardX", gameBoard.playBoardX);
     savedGame.setInt("playBoardY", gameBoard.playBoardY);
+    savedGame.setInt("player1Score", player1Score);
+    savedGame.setInt("player2Score", player2Score);
     for (int x = 0; x < gameBoard.boardSize; x++) {
       JSONArray colArr = new JSONArray();
       for (int y = 0; y < gameBoard.boardSize; y++) {
@@ -59,6 +61,9 @@ class Game {
     }
     
     savedGame = loadJSONObject("saveFile.json");
+    player1Score = savedGame.getInt("player1Score");
+    player2Score = savedGame.getInt("player2Score");
+    
     JSONArray savedBoard = savedGame.getJSONArray("gameBoard");
     currentSide = (char)savedGame.getInt("currentSide");
     int boardSize = gameBoard.boardSize;

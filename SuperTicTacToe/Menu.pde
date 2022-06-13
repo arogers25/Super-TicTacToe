@@ -92,12 +92,9 @@ class MainMenu extends Menu {
       currentMenu = inGameMenu;
     }
     if (loadButton.hovering) {
-      currentGame = new Game();
-      if (currentGame.savedGame != null) {
-        currentMenu = inGameMenu;
-      } else {
-        loadButton.col = color(200, 50, 50);
-      }
+      currentGame = new Game(new GlobalBoard(3, height * 0.70), selectedSide);
+      currentGame.load();
+      currentMenu = inGameMenu;
     }
   }
 }
