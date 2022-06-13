@@ -34,7 +34,7 @@ class GlobalBoard extends Board {
         Board current = boardArr[x][y];
         float centerOffset = (pieceSize - current.drawSize) / 2;
         current.draw(posX + (x * pieceSize) + centerOffset, posY + (y * pieceSize) + centerOffset);
-        if (current.getWinner() != 0) {
+        if (current.getWinner() != 0 && getWinner() == 0) {
           noStroke();
           fill(getSideColor(current.getWinner(), 150));
           rect(posX + (x * pieceSize), posY + (y * pieceSize), pieceSize, pieceSize);

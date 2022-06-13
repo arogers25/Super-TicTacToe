@@ -1,7 +1,4 @@
 Game currentGame;
-Menu currentMenu;
-Menu inGameMenu;
-Menu mainMenu;
 
 void setup() {
   strokeCap(SQUARE);
@@ -17,10 +14,6 @@ void setup() {
 void draw() {
   background(255);
   if (currentMenu == inGameMenu) {
-    char winner = currentGame.gameBoard.getWinner();
-    if (winner != 0) {
-      println(winner);
-    }
     currentGame.draw();
   }
   currentMenu.draw();

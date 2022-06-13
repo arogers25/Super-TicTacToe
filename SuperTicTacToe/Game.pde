@@ -1,8 +1,10 @@
 class Game {
   char startingSide = 'X';
   char currentSide = 0;
+  char winner = 0;
   GlobalBoard gameBoard;
   JSONObject savedGame;
+  int player1Score = 0, player2Score = 0;
 
   Game(GlobalBoard newGameBoard, char newStartingSide) {
     gameBoard = newGameBoard;
@@ -77,6 +79,23 @@ class Game {
 
   void draw() {
     gameBoard.draw(0, 0);
+    if (winner == 0) {
+      winner = gameBoard.getWinner();
+      if (gameBoard.getWinner() == 'X') player1Score++;
+      if (gameBoard.getWinner() == 'O') player2Score++;
+    } else {
+      noStroke();
+      fill(getSideColor(winner, 190));
+      rect((width / 2) - (gameBoard.drawSize / 2), (height / 2) - (gameBoard.drawSize / 2), gameBoard.drawSize, gameBoard.drawSize);
+      fill(0);
+      float winnerTextSize = height * 0.08;
+      textSize(winnerTextSize);
+      while (textWidth("X Wins") > gameBoard.drawSize) textSize(winnerTextSize--);
+      text("X Wins", width / 2, height * 0.5);
+    }
+    textSize(height * 0.10);
+    fill(0);
+    text(player1Score + " - " + player2Score, width / 2, height * 0.05);
     //drawPiece(10, 10, 70, currentSide);
   }
 

@@ -37,7 +37,7 @@ class LocalBoard extends Board {
   void draw(float posX, float posY) {
     drawGrid(posX, posY, drawSize, pieceSize, boardSize, color(170));
     drawPieces(posX, posY);
-    if ((parentBoard.currentPlayBoard == null || parentBoard.currentPlayBoard == this) && this.getWinner() == 0) {
+    if ((parentBoard.currentPlayBoard == null || parentBoard.currentPlayBoard == this) && this.getWinner() == 0 && currentGame.winner == 0) {
       noStroke();
       fill(color(0, 255, 0, 100));
       rect(posX, posY, drawSize, drawSize);
