@@ -5,16 +5,22 @@ class Game {
   GlobalBoard gameBoard;
   JSONObject savedGame;
   int player1Score = 0, player2Score = 0;
-  
-  Game() { // Create blank game to load saved game
-    load();
-  }
 
   Game(GlobalBoard newGameBoard, char newStartingSide) {
     gameBoard = newGameBoard;
     startingSide = newStartingSide;
     currentSide = startingSide;
     savedGame = new JSONObject();
+    savedGame.setJSONArray("gameBoard", new JSONArray());
+  }
+  
+  Game(GlobalBoard newGameBoard, char newStartingSide, int savedPlayer1Score, int savedPlayer2Score) {
+    gameBoard = newGameBoard;
+    startingSide = newStartingSide;
+    currentSide = startingSide;
+    savedGame = new JSONObject();
+    player1Score = savedPlayer1Score;
+    player2Score = savedPlayer2Score;
     savedGame.setJSONArray("gameBoard", new JSONArray());
   }
 
@@ -84,6 +90,9 @@ class Game {
       }
     }
     gameBoard.updateGlobalBoard();
+    if (gameBoard.getWinner() != 0) {
+      winner = gameBoard.getWinner();
+    }
   }
 
   void draw() {

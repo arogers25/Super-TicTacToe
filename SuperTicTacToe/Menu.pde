@@ -133,7 +133,7 @@ class GameMenu extends Menu {
       currentMenu = mainMenu;
     }
     if (restartButton.hovering && currentGame.winner != 0) {
-      currentGame = new Game(new GlobalBoard(3, height * 0.70), currentGame.startingSide);
+      currentGame = new Game(new GlobalBoard(3, height * 0.70), currentGame.startingSide, currentGame.player1Score, currentGame.player2Score);
     }
     if (saveButton.hovering) {
       currentGame.save();
