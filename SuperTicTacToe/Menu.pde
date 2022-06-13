@@ -7,7 +7,7 @@ class Menu {
   Button exitButton;
 
   Menu() {
-    exitButton = new Button("Exit", width - (height * 0.2), 0, (height * 0.2), (height * 0.07), color(255, 0, 0));
+    exitButton = new Button("Exit", width - (height * 0.2), 0, (height * 0.2), (height * 0.1), color(255, 0, 0));
     buttons = new ArrayList<Button>();
     buttons.add(exitButton);
   }
@@ -31,24 +31,27 @@ class Menu {
 
 class MainMenu extends Menu {
   Button playButton;
+  Button loadButton;
   ButtonList playerAmountButton;
   ButtonList startingSideButton;
-  int playerAmount = 0;
+  int playerAmount = 2;
 
   MainMenu() {
     super();
     float optionY = (height / 2);
     float optionH = (height * 0.07);
 
-    playButton = new Button("Play", (width * 0.35), optionY + optionH * 3, width * 0.3, optionH, color(100, 255, 100));
+    playButton = new Button("Play", (width * 0.35), optionY + optionH * 4.3, width * 0.3, optionH, color(100, 255, 100));
+    loadButton = new Button("Load Previous Game", (width * 0.35), optionY + optionH * 3, width * 0.3, optionH, color(200));
 
     playerAmountButton = new ButtonList(new String[]{"Zero Players", "One Player", "Two Players"}, width * 0.35, optionY + optionH, width * 0.3, optionH);
-    playerAmount = playerAmountButton.value;
+    playerAmountButton.value = playerAmount;
 
     startingSideButton = new ButtonList(new String[]{"", ""}, width * 0.4, height * 0.25, width * 0.2, width * 0.1);
 
     buttons.add(playerAmountButton);
     buttons.add(startingSideButton);
+    buttons.add(loadButton);
     buttons.add(playButton);
     updateSideButtons();
   }
@@ -61,6 +64,7 @@ class MainMenu extends Menu {
     textSize(height * 0.05);
     text("Who Goes First?", width / 2, height * 0.20);
     text("How Many Players?", width / 2, height * 0.50);
+    
     if (playerAmount != 1) {
       float pieceW = startingSideButton.buttons.get(0).w / 2;
       drawPiece(startingSideButton.buttons.get(0).x + (pieceW / 2), startingSideButton.buttons.get(0).y + (pieceW / 2), pieceW, 'X');
@@ -87,18 +91,32 @@ class MainMenu extends Menu {
       currentGame = new Game(new GlobalBoard(3, height * 0.70), selectedSide);
       currentMenu = inGameMenu;
     }
+    if (loadButton.hovering) {
+      currentGame = new Game();
+      if (currentGame.savedGame != null) {
+        currentMenu = inGameMenu;
+      } else {
+        loadButton.col = color(200, 50, 50);
+      }
+    }
   }
 }
 
 class GameMenu extends Menu {
   Button backButton;
   Button restartButton;
+  Button saveButton;
+  Button loadButton;
   
   GameMenu() {
     super();
-    backButton = new Button("Back To Menu", 0, 0, (height * 0.2), (height * 0.07), color(200));
+    backButton = new Button("Back To Menu", 0, 0, (height * 0.2), (height * 0.1), color(200));
     restartButton = new Button("Play Again", (width / 2) - (height * 0.1), (height / 2) + (height * 0.05), (height * 0.2), (height * 0.05), color(200));
+    saveButton = new Button("Save", 0, height - (height * 0.1), (height * 0.2), (height * 0.1), color(100, 100, 255));
+    loadButton = new Button("Load", width - (height * 0.2), height - (height * 0.1), (height * 0.2), (height * 0.1), color(100, 255, 100));
     buttons.add(backButton);
+    buttons.add(saveButton);
+    buttons.add(loadButton);
     buttons.add(restartButton);
   }
   
@@ -119,6 +137,12 @@ class GameMenu extends Menu {
     }
     if (restartButton.hovering && currentGame.winner != 0) {
       currentGame = new Game(new GlobalBoard(3, height * 0.70), currentGame.startingSide);
+    }
+    if (saveButton.hovering) {
+      currentGame.save();
+    }
+    if (loadButton.hovering) {
+      currentGame.load();
     }
   }
 }

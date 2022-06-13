@@ -5,6 +5,10 @@ class Game {
   GlobalBoard gameBoard;
   JSONObject savedGame;
   int player1Score = 0, player2Score = 0;
+  
+  Game() { // Create blank game to load saved game
+    load();
+  }
 
   Game(GlobalBoard newGameBoard, char newStartingSide) {
     gameBoard = newGameBoard;
@@ -96,6 +100,9 @@ class Game {
     textSize(height * 0.10);
     fill(0);
     text(player1Score + " - " + player2Score, width / 2, height * 0.05);
+    textSize(height * 0.05);
+    text(" Moves", width / 2, height - (gameBoard.pieceSize * 0.4));
+    drawPiece((width * 0.49) - textWidth("Moves"), height - (gameBoard.pieceSize * 0.5), gameBoard.pieceSize * 0.3, currentSide);
     //drawPiece(10, 10, 70, currentSide);
   }
 
