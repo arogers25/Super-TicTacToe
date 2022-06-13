@@ -52,9 +52,9 @@ class MainMenu extends Menu {
   void draw() {
     super.draw();
     fill(0);
-    textSize(72);
+    textSize(height * 0.10);
     text("Super Tic Tac Toe", width / 2, height * 0.07);
-    textSize(48);
+    textSize(height * 0.05);
     text("Who Goes First?", width / 2, height * 0.20);
     text("How Many Players?", width / 2, height * 0.50);
     if (playerAmount != 1) {
