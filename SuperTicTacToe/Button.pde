@@ -22,7 +22,7 @@ class Button {
     rect(x, y, w, h);
     textAlign(CENTER, CENTER);
     int newTextSize = 32;
-    while (textWidth(label) > w) textSize(newTextSize--);
+    while (textWidth(label) > (w * 0.9)) textSize(newTextSize--);
     fill(0);
     text(label, x + w / 2, (y + h / 2) - (textDescent() / 2));
     if (hovering) {
@@ -40,16 +40,17 @@ class ButtonList extends Button{
   ArrayList<Button> buttons;
   int value = 0;
   
-  ButtonList(String[] optionsList, float newX, float newY, float newW, float newH, color newCol) {
-    super("", newX, newY, newW, newH, newCol);
+  ButtonList(String[] optionsList, float newX, float newY, float newW, float newH) {
+    super("", newX, newY, newW, newH, color(200));
     buttons = new ArrayList<Button>();
     float buttonW = w / optionsList.length;
     for (int i = 0; i < optionsList.length; i++) {
-      buttons.add(new Button(optionsList[i], x + buttonW * i, y, buttonW, newH, col));
+      buttons.add(new Button(optionsList[i], x + buttonW * i, y, buttonW, newH, color(200)));
     }
   }
   
   void draw() {
+    hovering = (mouseX >= x && mouseX <= x + w && mouseY >= y && mouseY <= y + h);
     for (int i = 0; i < buttons.size(); i++) {
       if (value == i) {
         buttons.get(i).col = color(170);

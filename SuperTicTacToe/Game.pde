@@ -77,7 +77,7 @@ class Game {
 
   void draw() {
     gameBoard.draw(0, 0);
-    drawPiece(10, 10, 70, currentSide);
+    //drawPiece(10, 10, 70, currentSide);
   }
 
   void mousePressed() {

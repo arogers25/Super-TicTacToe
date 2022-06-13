@@ -8,10 +8,9 @@ void setup() {
   fullScreen();
   gameFont = createFont("Arial", 32);
   textFont(gameFont);
-  currentGame = new Game(new GlobalBoard(3, height * 0.80), 'X');
   
   mainMenu = new MainMenu();
-  inGameMenu = new MainMenu();
+  inGameMenu = new GameMenu();
   currentMenu = mainMenu;
 }
 
