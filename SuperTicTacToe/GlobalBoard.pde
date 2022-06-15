@@ -51,7 +51,7 @@ class GlobalBoard extends Board {
     drawGrid(posX, posY, drawSize, pieceSize, boardSize, color(0));
   }
 
-  boolean validClick(float posX, float posY, char side) { //TODO cleanup
+  boolean validClick(float posX, float posY, char side) {
     posX += (width / 2) - (drawSize / 2);
     posY += (height / 2) - (drawSize / 2);
     int gridClickX = floor((mouseX - posX) / pieceSize);

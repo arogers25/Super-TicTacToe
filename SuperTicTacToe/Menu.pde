@@ -86,6 +86,7 @@ class MainMenu extends Menu {
     super.input();
     playerAmount = playerAmountButton.value;
     char selectedSide = startingSideButton.value == 0 ? 'X' : 'O';
+
     updateSideButtons();
     if (playButton.hovering) {
       currentGame = new Game(new GlobalBoard(3, height * 0.70), selectedSide);
@@ -98,7 +99,8 @@ class MainMenu extends Menu {
         }
       case 1: 
         {
-          currentGame.bots.add(new Bot(currentGame, selectedSide == 'X' ? 'O' : 'X'));
+          currentGame.startingSide = 'X';
+          currentGame.bots.add(new Bot(currentGame, selectedSide == 'X' ? 'O' : 'X')); // Need to fix bot starting side
         }
       }
       currentMenu = inGameMenu;

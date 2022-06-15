@@ -77,7 +77,7 @@ class Board {
     return 0;
   }
 
-  char getWinner() { // TODO cleanup all check winner methods
+  char getWinner() {
     if (getRowWinner() != 0 && getRowWinner() != 'T') {
       return getRowWinner();
     }

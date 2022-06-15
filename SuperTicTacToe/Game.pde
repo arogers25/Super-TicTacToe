@@ -77,7 +77,7 @@ class Game {
     JSONArray savedBoard = savedGame.getJSONArray("gameBoard");
     currentSide = (char)savedGame.getInt("currentSide");
     int boardSize = gameBoard.boardSize;
-    if (savedGame.getInt("playBoardX") >= 0 && savedGame.getInt("playBoardX") < boardSize) { // TODO cleanup
+    if (savedGame.getInt("playBoardX") >= 0 && savedGame.getInt("playBoardX") < boardSize) {
       gameBoard.currentPlayBoard = gameBoard.boardArr[savedGame.getInt("playBoardX")][savedGame.getInt("playBoardY")];
     } else {
       gameBoard.currentPlayBoard = null;
@@ -102,8 +102,10 @@ class Game {
   void draw() {
     gameBoard.draw(0, 0);
     if (winner == 0) {
+      if (bots.size() > 0) {
       for (Bot i : bots) {
         i.doRandomMove();
+      }
       }
       winner = gameBoard.getWinner();
       if (gameBoard.getWinner() == 'X') player1Score++;
