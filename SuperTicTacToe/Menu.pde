@@ -55,7 +55,7 @@ class MainMenu extends Menu {
     buttons.add(playButton);
     updateSideButtons();
   }
-  
+
   void draw() {
     super.draw();
     fill(0);
@@ -64,14 +64,14 @@ class MainMenu extends Menu {
     textSize(height * 0.05);
     text("Who Goes First?", width / 2, height * 0.20);
     text("How Many Players?", width / 2, height * 0.50);
-    
+
     if (playerAmount != 1) {
       float pieceW = startingSideButton.buttons.get(0).w / 2;
       drawPiece(startingSideButton.buttons.get(0).x + (pieceW / 2), startingSideButton.buttons.get(0).y + (pieceW / 2), pieceW, 'X');
       drawPiece(startingSideButton.buttons.get(1).x + (pieceW / 2), startingSideButton.buttons.get(1).y + (pieceW / 2), pieceW, 'O');
     }
   }
-  
+
   void updateSideButtons() { // Find a different way to do this
     if (playerAmount == 1) {
       startingSideButton.buttons.get(0).label = "Human";
@@ -89,6 +89,18 @@ class MainMenu extends Menu {
     updateSideButtons();
     if (playButton.hovering) {
       currentGame = new Game(new GlobalBoard(3, height * 0.70), selectedSide);
+      currentGame.bots = new ArrayList<Bot>();
+      switch (playerAmount) {
+      case 0: 
+        {
+          currentGame.bots.add(new Bot(currentGame, 'X'));
+          currentGame.bots.add(new Bot(currentGame, 'O'));
+        }
+      case 1: 
+        {
+          currentGame.bots.add(new Bot(currentGame, selectedSide == 'X' ? 'O' : 'X'));
+        }
+      }
       currentMenu = inGameMenu;
     }
     if (loadButton.hovering) {
@@ -104,7 +116,7 @@ class GameMenu extends Menu {
   Button restartButton;
   Button saveButton;
   Button loadButton;
-  
+
   GameMenu() {
     super();
     backButton = new Button("Back To Menu", 0, 0, (height * 0.2), (height * 0.1), color(200));
@@ -116,7 +128,7 @@ class GameMenu extends Menu {
     buttons.add(loadButton);
     buttons.add(restartButton);
   }
-  
+
   void draw() {
     for (Button i : buttons) {
       textSize(32);
@@ -126,7 +138,7 @@ class GameMenu extends Menu {
       i.draw();
     }
   }
-  
+
   void input() {
     super.input();
     if (backButton.hovering) {
@@ -134,6 +146,23 @@ class GameMenu extends Menu {
     }
     if (restartButton.hovering && currentGame.winner != 0) {
       currentGame = new Game(new GlobalBoard(3, height * 0.70), currentGame.startingSide, currentGame.player1Score, currentGame.player2Score);
+      int playerAmount = 2 - currentGame.bots.size();
+      char botSide = 0;
+      if (playerAmount == 1) {
+        botSide = currentGame.bots.get(0).side;
+      }
+      currentGame.bots = new ArrayList<Bot>();
+      switch (playerAmount) {
+      case 0: 
+        {
+          currentGame.bots.add(new Bot(currentGame, 'X'));
+          currentGame.bots.add(new Bot(currentGame, 'O'));
+        }
+      case 1: 
+        {
+          currentGame.bots.add(new Bot(currentGame, botSide));
+        }
+      }
     }
     if (saveButton.hovering) {
       currentGame.save();

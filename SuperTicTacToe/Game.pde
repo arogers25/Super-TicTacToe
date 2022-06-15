@@ -1,10 +1,12 @@
 class Game {
   char startingSide = 'X';
   char currentSide = 0;
+  char humanSide = 0;
   char winner = 0;
   GlobalBoard gameBoard;
   JSONObject savedGame;
   int player1Score = 0, player2Score = 0;
+  ArrayList<Bot> bots;
 
   Game(GlobalBoard newGameBoard, char newStartingSide) {
     gameBoard = newGameBoard;
@@ -13,7 +15,7 @@ class Game {
     savedGame = new JSONObject();
     savedGame.setJSONArray("gameBoard", new JSONArray());
   }
-  
+
   Game(GlobalBoard newGameBoard, char newStartingSide, int savedPlayer1Score, int savedPlayer2Score) {
     gameBoard = newGameBoard;
     startingSide = newStartingSide;
@@ -43,13 +45,14 @@ class Game {
     }
     return savedLocalBoard;
   }
-  
+
   void save() {
     savedGame.setInt("currentSide", currentSide);
     savedGame.setInt("playBoardX", gameBoard.playBoardX);
     savedGame.setInt("playBoardY", gameBoard.playBoardY);
     savedGame.setInt("player1Score", player1Score);
     savedGame.setInt("player2Score", player2Score);
+    savedGame.setInt("humanSide", humanSide);
     for (int x = 0; x < gameBoard.boardSize; x++) {
       JSONArray colArr = new JSONArray();
       for (int y = 0; y < gameBoard.boardSize; y++) {
@@ -59,17 +62,18 @@ class Game {
     }
     saveJSONObject(savedGame, "saveFile.json");
   }
-  
+
   void load() {
     if (loadStrings("saveFile.json") == null) {
       println("Savefile does not exist!");
       return;
     }
-    
+
     savedGame = loadJSONObject("saveFile.json");
     player1Score = savedGame.getInt("player1Score");
     player2Score = savedGame.getInt("player2Score");
-    
+    humanSide = (char)savedGame.getInt("humanSide");
+
     JSONArray savedBoard = savedGame.getJSONArray("gameBoard");
     currentSide = (char)savedGame.getInt("currentSide");
     int boardSize = gameBoard.boardSize;
@@ -78,7 +82,7 @@ class Game {
     } else {
       gameBoard.currentPlayBoard = null;
     }
-    
+
     for (int globalX = 0; globalX < boardSize; globalX++) {
       for (int globalY = 0; globalY < boardSize; globalY++) {
         for (int x = 0; x < boardSize; x++) {
@@ -98,6 +102,9 @@ class Game {
   void draw() {
     gameBoard.draw(0, 0);
     if (winner == 0) {
+      for (Bot i : bots) {
+        i.doRandomMove();
+      }
       winner = gameBoard.getWinner();
       if (gameBoard.getWinner() == 'X') player1Score++;
       if (gameBoard.getWinner() == 'O') player2Score++;
@@ -121,7 +128,10 @@ class Game {
   }
 
   void mousePressed() {
-    if (gameBoard.validClick(0, 0, currentSide)) {
+    if (bots.size() > 1 || (bots.size() == 1 && currentSide == bots.get(0).side)) {
+      return;
+    }
+    if (gameBoard.validClick(0, 0, currentSide) ) {
       switchSides();
     }
   }
